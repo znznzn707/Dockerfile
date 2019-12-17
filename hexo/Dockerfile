@@ -8,7 +8,8 @@ ENV GIT_USER_NAME="test"
 ENV GIT_USER_EMAIL="test@example.com"
 ENV SSH_KEY="id_rsa"
 COPY id_rsa /root/.ssh/
-RUN ssh-agent ssh-add /root/.ssh/$SSH_KEY
+RUN chmod 600 /root/.ssh/$SSH_KEY && \
+ssh-agent ssh-add /root/.ssh/$SSH_KEY
 WORKDIR /opt/Blog
 RUN git config --global user.name $GIT_USER_NAME && \ 
     git config --global user.email $GIT_USER_EMAIL
