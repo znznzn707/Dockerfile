@@ -3,6 +3,7 @@ MAINTAINER znznzn707,<znznzn707@163.com>
 LABEL description="The hexo with git"
 LABEL version="1.0"
 RUN npm --registry=https://registry.npm.taobao.org install hexo-cli -g && npm install
+RUN npm install hexo-deployer-git
 RUN mkdir /opt/Blog
 ENV GIT_USER_NAME="test"
 ENV GIT_USER_EMAIL="test@example.com"
