@@ -9,13 +9,13 @@ ENV GIT_USER_EMAIL="test@example.com"
 ENV SSH_KEY="id_rsa"
 COPY id_rsa /root/.ssh/
 WORKDIR /opt/Blog
-RUN hexo init && \
-    ssh-agent ssh-add /root/.ssh/$SSH_KEY && \
-    npm install hexo-deployer-git --save && \
+RUN ssh-agent ssh-add /root/.ssh/$SSH_KEY && \
     git config --global user.name $GIT_USER_NAME && \ 
-    git config --global user.email $GIT_USER_EMAIL && \
+    git config --global user.email $GIT_USER_EMAIL
+RUN hexo init && \
+    npm install hexo-deployer-git --save && \
     hexo clean && hexo g
-VOLUME /opt/Blog/ 
+VOLUME /opt/Blog 
 VOLUME /root/.ssh
 EXPOSE 4000
 CMD hexo s
